@@ -1,0 +1,500 @@
+{% extends 'base.html'%}
+{% if request.path == "/" %}
+    {% include 'components/nav.html' %}
+{% else %}
+    {% include 'components/nav2.html' %}
+{% endif %}
+
+{% block content %}
+
+    <!-- MAIN CONTENT -->
+    <main>
+         <!-- Services Grid Section (CARDS) -->
+        <section id="services" class="py-16 bg-gradient-to-b from-white to-gray-50">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-14">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Core <span class="text-indigo-600">Services</span></h2>
+                    <div class="w-24 h-1 bg-indigo-500 mx-auto rounded-full mt-3"></div>
+                    <p class="text-gray-500 mt-4">Click on any card to apply — you will be taken to the dedicated form page</p>
+                </div>
+
+                <!-- 5 Service Cards - YOU CAN REPLACE THE LINKS BELOW -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Card 1: Gumasta License -->
+    {% for service in coreservice %}
+    <a href="/{{ service.targetservice }}/" class="service-card group bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-2xl border border-gray-200 transition-all duration-300 hover:-translate-y-2 block">
+        <div class="w-16 h-16 {{ service.cardcolor}} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <i class="{{ service.serviceicon}} {{ service.serviceiconsize }} {{ service.serviceiconcolor }}"></i>
+            <!-- fas fa-store text-3xl text-rose-700 -->
+        </div>
+        <h3 class="text-lg font-bold text-gray-800">{{ service.servicetype}}</h3>
+        <p class="text-gray-500 text-sm mt-2">{{ service.servicereg}}</p>
+        <div class="mt-3">
+    <span class="{{ service.cardcolor }} text-black text-xs font-semibold px-3 py-1 rounded-full inline-block">
+        {{ service.serviceavialablty }}
+    </span>
+</div>
+
+
+        <!-- Highlighted Button -->
+        <span class="apply-btn inline-block mt-4 px-5 py-2 text-sm font-bold text-white {{ service.btncolor }} rounded-full shadow-lg transition transform hover:scale-105">
+        Apply Now →
+    </span>
+</a>
+{% endfor %}
+
+    <!-- Card 2: Udyam Aadhaar -->
+    <!-- <a href="#" class="service-card group bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-2xl border border-gray-200 transition-all duration-300 hover:-translate-y-2 block" data-service="udyam">
+        <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <i class="fas fa-chart-line text-3xl text-amber-700"></i>
+        </div>
+        <h3 class="text-lg font-bold text-gray-800">Udyam Aadhaar</h3>
+        <p class="text-gray-500 text-sm mt-2">MSME Registration</p>
+        <div class="mt-3">
+    <span class="bg-amber-100 text-amber-700 text-xs font-semibold px-3 py-1 rounded-full inline-block">
+        New & Renewal Available
+    </span>
+</div> -->
+
+
+        <!-- <span class="apply-btn inline-block mt-4 px-5 py-2 text-sm font-bold text-white bg-amber-600 rounded-full shadow-lg hover:bg-amber-700 transition transform hover:scale-105">
+    Apply Now →
+</span>
+    </a> -->
+
+    <!-- Card 3: GST Registration -->
+    <!-- <a href="#" class="service-card group bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-2xl border border-gray-200 transition-all duration-300 hover:-translate-y-2 block" data-service="gst">
+        <div class="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <i class="fas fa-file-invoice-dollar text-3xl text-indigo-700"></i>
+        </div>
+        <h3 class="text-lg font-bold text-gray-800">GST Registration</h3>
+        <p class="text-gray-500 text-sm mt-2">15-digit GSTIN • Business Tax</p>
+        <div class="mt-3">
+    <span class="bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full inline-block">
+        New & Renewal Available
+    </span>
+</div>
+ -->
+<!-- 
+        <span class="apply-btn inline-block mt-4 px-5 py-2 text-sm font-bold text-white bg-indigo-600 rounded-full shadow-lg hover:bg-indigo-700 transition transform hover:scale-105">
+    Apply Now →
+</span>
+    </a> -->
+
+    <!-- Card 4: Driving Licence -->
+    <!-- <a href="#" class="service-card group bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-2xl border border-gray-200 transition-all duration-300 hover:-translate-y-2 block" data-service="dl">
+        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <i class="fas fa-id-card text-3xl text-blue-700"></i>
+        </div>
+        <h3 class="text-lg font-bold text-gray-800">Driving Licence</h3>
+        <p class="text-gray-500 text-sm mt-2">Learner / Permanent DL</p>
+        <div class="mt-3">
+    <span class="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full inline-block">
+        New & Renewal Available
+    </span>
+</div>
+
+
+        <span class="apply-btn inline-block mt-4 px-5 py-2 text-sm font-bold text-white bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 transition transform hover:scale-105">
+            Apply Now →
+        </span>
+    </a> -->
+
+    <!-- Card 5: Voter ID -->
+    <!-- <a href="#" class="service-card group bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-2xl border border-gray-200 transition-all duration-300 hover:-translate-y-2 block" data-service="voter">
+        <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <i class="fas fa-check-circle text-3xl text-green-700"></i>
+        </div>
+        <h3 class="text-lg font-bold text-gray-800">Voter ID</h3>
+        <p class="text-gray-500 text-sm mt-2">New & Correction</p>
+        <div class="mt-3">
+    <span class="bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full inline-block">
+        New & Renewal Available
+    </span>
+</div>
+
+
+        <span class="apply-btn inline-block mt-4 px-5 py-2 text-sm font-bold text-white bg-green-600 rounded-full shadow-lg hover:bg-green-700 transition transform hover:scale-105">
+            Apply Now →
+        </span>
+    </a> -->
+    <!-- Card 6: Street Vendor License -->
+<!-- <a href="#" class="service-card group bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-2xl border border-gray-200 transition-all duration-300 hover:-translate-y-2 block" data-service="street-vendor">
+    <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+        <i class="fas fa-store-alt text-3xl text-orange-700"></i>
+    </div>
+    <h3 class="text-lg font-bold text-gray-800">Street Vendor License</h3>
+    <p class="text-gray-500 text-sm mt-2">Hawker / Street Selling License</p>
+    <div class="mt-3">
+    <span class="bg-orange-100 text-orange-700 text-xs font-semibold px-3 py-1 rounded-full inline-block">
+        New & Renewal Available
+    </span>
+</div>
+
+    <span class="apply-btn inline-block mt-4 px-5 py-2 text-sm font-bold text-white bg-orange-600 rounded-full shadow-lg hover:bg-orange-700 transition transform hover:scale-105">
+        Apply Now →
+    </span>
+</a> -->
+<!-- NEW: Domicile Certificate -->
+<!-- <a href="#" class="service-card group bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-2xl border border-gray-200 transition-all duration-300 hover:-translate-y-2 block" data-service="domicile">
+    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+        <i class="fas fa-home text-3xl text-purple-700"></i>
+    </div>
+    <h3 class="text-lg font-bold text-gray-800">Domicile Certificate</h3>
+    <p class="text-gray-500 text-sm mt-2">Proof of Residence</p>
+    <div class="mt-3">
+    <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full inline-block">
+        New & Renewal Available
+    </span>
+</div>
+
+
+    <span class="apply-btn inline-block mt-4 px-5 py-2 text-sm font-bold text-white bg-purple-600 rounded-full shadow-lg hover:bg-purple-700 transition transform hover:scale-105">
+        Apply Now →
+    </span>
+</a> -->
+
+<!-- NEW: Gazette Notification -->
+<!-- <a href="#" class="service-card group bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-2xl border border-gray-200 transition-all duration-300 hover:-translate-y-2 block" data-service="gazette">
+    <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+        <i class="fas fa-newspaper text-3xl text-pink-700"></i>
+    </div>
+    <h3 class="text-lg font-bold text-gray-800">Gazette Notification</h3>
+    <p class="text-gray-500 text-sm mt-2">Name Change / Publication</p>
+    <div class="mt-3">
+    <span class="bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full inline-block">
+        New & Renewal Available
+    </span>
+</div>
+
+
+    <span class="apply-btn inline-block mt-4 px-5 py-2 text-sm font-bold text-white bg-pink-600 rounded-full shadow-lg hover:bg-pink-700 transition transform hover:scale-105">
+        Apply Now →
+    </span>
+</a> -->
+
+</div>
+            </div>
+        </section>
+
+        <!-- Hero Section -->
+        <section id="home" class="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-12 md:py-20">
+            <div class="absolute top-0 right-0 w-80 h-80 bg-indigo-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+            <div class="max-w-7xl mx-auto px-5 md:px-10 flex flex-col-reverse md:flex-row items-center gap-12">
+                <div class="flex-1 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 bg-indigo-100 text-indigo-800 rounded-full px-4 py-1.5 text-sm font-semibold mb-4">
+                        <i class="fas fa-bolt text-yellow-500"></i>
+                        <span>Instant e-Service Assistance</span>
+                    </div>
+                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-gray-800">
+                        Apply for 
+                        <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                            GST, Driving Licence, Voter ID
+                        </span> & More
+                    </h1>
+                    <p class="text-gray-500 text-lg mt-4 max-w-xl mx-auto md:mx-0">
+                        Simple, paperless & fast assistance for all your government document needs. Trusted by thousands across India.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-start mt-6">
+                        <a href="#services" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold shadow-lg transition flex items-center gap-2">
+                            Explore Services <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#services-list" class="px-6 py-3 bg-white border border-gray-300 rounded-xl font-medium text-gray-700 hover:border-indigo-400 hover:text-indigo-600 transition">
+                            View All Services
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-6 mt-8 text-sm text-gray-500">
+                        <span>✔ 100% Secure</span>
+                        <span>✔ Fast Processing</span>
+                        <span>✔ Expert Support</span>
+                    </div>
+                </div>
+                <div class="flex-1 flex justify-center">
+                    <div class="relative">
+                        <img src="{{ doc_img.doc_img.url }}" alt="Document Service" class="w-72 md:w-96 rounded-2xl shadow-2xl object-cover"/>
+                        <div class="absolute -bottom-5 -left-5 bg-white rounded-xl shadow-lg px-4 py-2 flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span class="text-sm font-medium text-gray-700">Verified Service</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       
+        <!-- SERVICES LIST SECTION (LI Elements) -->
+        <section id="services-list" class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-5 md:px-10">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">All Services <span class="text-indigo-600">(List View)</span></h2>
+                    <div class="w-24 h-1 bg-indigo-500 mx-auto rounded-full mt-3"></div>
+                    <p class="text-gray-500 mt-4">Click on any service below to apply</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden">
+    <div class="bg-indigo-50 px-6 py-4 border-b">
+        <p class="font-semibold text-gray-700"><i class="fas fa-list-ul mr-2"></i> Click any service to open its application form</p>
+    </div>
+    <ul class="divide-y divide-gray-100">
+
+        <!-- LIST ITEM 1: Gumasta License -->
+        
+        {% for service in coreservice %}
+<li class="service-list-item flex items-center justify-between p-5 cursor-pointer transition-all border-l-4 border-l-transparent hover:border-l-indigo-500" >
+    <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center"><i class="{{ service.serviceicon}} {{ service.serviceiconsize }} {{ service.serviceiconcolor }}"></i></div>
+        <div><h3 class="font-bold text-gray-800 text-lg">{{ service.servicetype}}</h3><p class="text-sm text-gray-500">{{ service.servicereg}}</p>
+            
+            
+            <span class="inline-block mt-2 bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">
+                {{ service.serviceavialablty }}
+            </span></div>
+            </div>
+            <a href="/{{ service.targetservice }}/"><i class="fas fa-chevron-right text-gray-400"></i></a>
+            
+        </li>
+        {% endfor %}  
+
+        <!-- LIST ITEM 2: Udyam Aadhaar -->
+        <!-- <li class="service-list-item flex items-center justify-between p-5 cursor-pointer transition-all border-l-4 border-l-transparent hover:border-l-indigo-500" data-service="{{ service.targetservice }}">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center"><i class="fas fa-chart-line text-xl text-amber-700"></i></div>
+                <div><h3 class="font-bold text-gray-800 text-lg">Udyam Aadhaar</h3><p class="text-sm text-gray-500">MSME Registration, Instant Approval</p> 
+    </p>
+
+    <span class="inline-block mt-2 bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">
+        New & Renewal Available
+    </span></div>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </li> -->
+
+        <!-- LIST ITEM 3: GST -->
+        <!-- <li class="service-list-item flex items-center justify-between p-5 cursor-pointer transition-all border-l-4 border-l-transparent hover:border-l-indigo-500" data-service="gst">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center"><i class="fas fa-file-invoice-dollar text-xl text-indigo-700"></i></div>
+                <div><h3 class="font-bold text-gray-800 text-lg">GST Registration</h3><p class="text-sm text-gray-500">15-digit GSTIN | Business Tax Registration</p>
+                 
+
+    <span class="inline-block mt-2 bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">
+        New & Renewal Available
+    </span></div>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </li> -->
+
+        <!-- LIST ITEM 4: Driving Licence -->
+        <!-- <li class="service-list-item flex items-center justify-between p-5 cursor-pointer transition-all border-l-4 border-l-transparent hover:border-l-indigo-500" data-service="dl">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center"><i class="fas fa-id-card text-xl text-blue-700"></i></div>
+                <div><h3 class="font-bold text-gray-800 text-lg">Driving Licence</h3><p class="text-sm text-gray-500">Learner / Permanent DL + Slot Booking</p> 
+    </p>
+
+    <span class="inline-block mt-2 bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">
+        New & Renewal Available
+    </span></div>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </li> -->
+
+        <!-- LIST ITEM 5: Voter ID -->
+        <!-- <li class="service-list-item flex items-center justify-between p-5 cursor-pointer transition-all border-l-4 border-l-transparent hover:border-l-indigo-500" data-service="voter">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center"><i class="fas fa-check-circle text-xl text-green-700"></i></div>
+                <div><h3 class="font-bold text-gray-800 text-lg">Voter ID</h3><p class="text-sm text-gray-500">New Voter ID / Corrections / e-EPIC</p> 
+
+    <span class="inline-block mt-2 bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">
+        New & Renewal Available
+    </span></div>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </li> -->
+        <!-- LIST ITEM 6: Street Vendor License -->
+<!-- <li class="service-list-item flex items-center justify-between p-5 cursor-pointer transition-all border-l-4 border-l-transparent hover:border-l-indigo-500" data-service="street-vendor">
+    <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
+            <i class="fas fa-store-alt text-xl text-orange-700"></i>
+        </div>
+        <div>
+            <h3 class="font-bold text-gray-800 text-lg">Street Vendor License</h3>
+            <p class="text-sm text-gray-500">
+                A Street Vendor Licence (also called a Hawker Licence) is an official permission given by the local municipal authority to sell goods on streets, footpaths, or public places legally.
+            </p>
+            
+    <span class="inline-block mt-2 bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">
+        New & Renewal Available
+    </span>
+        </div>
+    </div>
+    <i class="fas fa-chevron-right text-gray-400"></i>
+</li> -->
+<!-- NEW: Domicile -->
+<!-- <li class="service-list-item flex items-center justify-between p-5 cursor-pointer transition-all border-l-4 border-l-transparent hover:border-l-indigo-500" data-service="domicile">
+    <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+            <i class="fas fa-home text-xl text-purple-700"></i>
+        </div>
+        <div>
+            <h3 class="font-bold text-gray-800 text-lg">Domicile Certificate</h3>
+            <p class="text-sm text-gray-500">Proof of Residence</p>
+            
+
+    <span class="inline-block mt-2 bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">
+        New & Renewal Available
+    </span>
+        </div>
+    </div>
+    <i class="fas fa-chevron-right text-gray-400"></i>
+</li> -->
+
+<!-- NEW: Gazette -->
+<!-- <li class="service-list-item flex items-center justify-between p-5 cursor-pointer transition-all border-l-4 border-l-transparent hover:border-l-indigo-500" data-service="gazette">
+    <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center">
+            <i class="fas fa-newspaper text-xl text-pink-700"></i>
+        </div>
+        <div>
+            <h3 class="font-bold text-gray-800 text-lg">Gazette Notification</h3>
+            <p class="text-sm text-gray-500">Name Change / Publication</p>
+             
+
+    <span class="inline-block mt-2 bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">
+        New & Renewal Available
+    </span>
+        </div>
+    </div>
+    <i class="fas fa-chevron-right text-gray-400"></i>
+</li> -->
+
+    </ul>
+</div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <!-- How It Works -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-5 md:px-10 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">
+            How It <span class="text-indigo-600">Works</span>
+        </h2>
+        <p class="text-gray-500 mt-3 mb-10">
+            Simple 4-step process to get your document done
+        </p>
+
+        <div class="grid md:grid-cols-4 gap-8">
+
+            <!-- Step 1 -->
+            <div class="p-6 bg-white rounded-2xl shadow hover:shadow-xl transition">
+                <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                    1
+                </div>
+                <h3 class="font-bold text-lg">Choose Service</h3>
+                <p class="text-gray-500 text-sm mt-2">
+                    Select the document service you need
+                </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="p-6 bg-white rounded-2xl shadow hover:shadow-xl transition">
+                <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                    2
+                </div>
+                <h3 class="font-bold text-lg">Fill Application</h3>
+                <p class="text-gray-500 text-sm mt-2">
+                    Complete the form with your details
+                </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="p-6 bg-white rounded-2xl shadow hover:shadow-xl transition">
+                <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                    3
+                </div>
+                <h3 class="font-bold text-lg">Make Payment</h3>
+                <p class="text-gray-500 text-sm mt-2">
+                    Complete the payment to proceed further
+                </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="p-6 bg-white rounded-2xl shadow hover:shadow-xl transition">
+                <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                    4
+                </div>
+                <h3 class="font-bold text-lg">Get Assistance</h3>
+                <p class="text-gray-500 text-sm mt-2">
+                    Our expert will contact you and guide you
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 pt-12 pb-6">
+        <div class="max-w-7xl mx-auto px-5 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center md:text-left">
+                <div><h2 class="text-2xl font-bold mb-3 bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">Samarth Seva</h2><p class="text-sm text-gray-400">We provide easy, fast & reliable assistance for government document services.</p></div>
+                <div><h3 class="text-xl font-semibold mb-3 text-indigo-400">Quick Links</h3><ul class="space-y-2 text-sm"><li><a href="#home" class="hover:text-indigo-400 transition">Home</a></li><li><a href="#services" class="hover:text-indigo-400 transition">Services</a></li><li><a href="#services-list" class="hover:text-indigo-400 transition">All Services</a></li></ul></div>
+                <div>
+    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Services</h3>
+    <ul class="space-y-2 text-sm">
+
+        <li class="cursor-pointer hover:text-indigo-400 transition" data-service="gumasta">
+            <a href="#gumasta">Gumasta License</a>
+        </li>
+
+        <li class="cursor-pointer hover:text-indigo-400 transition" data-service="udyam">
+            <a href="#udyam">Udyam Aadhaar</a>
+        </li>
+
+        <li class="cursor-pointer hover:text-indigo-400 transition" data-service="gst">
+            <a href="#gst">GST Registration</a>
+        </li>
+
+        <li class="cursor-pointer hover:text-indigo-400 transition" data-service="dl">
+            <a href="#dl">Driving Licence</a>
+        </li>
+
+        <li class="cursor-pointer hover:text-indigo-400 transition" data-service="voter">
+            <a href="#voter">Voter ID</a>
+        </li>
+         <li class="cursor-pointer hover:text-indigo-400 transition" data-service="street-vendor">
+            <a href="#street-vendor">Street Vendor License</a>
+        </li>
+        <li class="cursor-pointer hover:text-indigo-400 transition" data-service="domicile">
+            <a href="#domicile">Domicile</a>
+        </li>
+        <li class="cursor-pointer hover:text-indigo-400 transition" data-service="gazette">
+            <a href="#gazette">Gazette Notification</a>
+        </li>
+
+    </ul>
+</div>
+                <div>
+    <h3 class="text-xl font-semibold mb-3 text-indigo-400">Contact</h3>
+    
+    <p class="text-sm">📍 Punjab, India</p>
+    
+    <p class="text-sm mt-1">
+        📞 <a href="tel:+919923023977" class="hover:text-indigo-400 transition">
+            +919923023977
+        </a>
+    </p>
+    
+    <p class="text-sm mt-1">
+        ✉️ <a href="mailto:contact@documentserviceprovider.com" class="hover:text-indigo-400 transition">
+            contact@documentserviceprovider.com
+        </a>
+    </p>
+</div>
+            
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center text-sm text-gray-400">© 2026 Samarth Seva | Assisted service platform, not a government website.</div>
+        </div>
+    </footer>
+
+{% endblock %}

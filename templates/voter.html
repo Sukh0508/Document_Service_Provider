@@ -1,0 +1,364 @@
+{% extends 'base.html'%}
+{% if request.path == "/" %}
+    {% include 'components/nav.html' %}
+{% else %}
+    {% include 'components/nav2.html' %}
+{% endif %}
+
+{% block content %}
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #f8fafc; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        .progress-step { transition: all 0.3s ease; }
+        .progress-step:hover { transform: translateY(-4px); }
+        .doc-card { transition: all 0.25s ease; }
+        .doc-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        .gradient-text {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .bg-gradient-green { background: linear-gradient(135deg, #065f46 0%, #10b981 100%); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #6ee7b7; border-radius: 8px; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fadeInUp 0.5s ease-out forwards; }
+        body,html {
+            overflow-x: hidden;
+        }
+    </style>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-green-50 py-12 md:py-20">
+            <div class="absolute top-0 right-0 w-80 h-80 bg-emerald-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-green-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-3xl mx-auto">
+                    <div class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 rounded-full px-4 py-1.5 text-sm font-semibold mb-4">
+                        <i class="fas fa-vote-yea text-emerald-600"></i>
+                        <span>Online Voter ID Registration</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 leading-tight">
+                        Voter ID 
+                        <span class="gradient-text">Registration</span>
+                    </h1>
+                    <p class="text-gray-600 text-lg mt-4">Apply for new Voter ID card, corrections, or transfer. Simple online process with expert assistance & doorstep delivery of EPIC card.</p>
+                    <div class="flex flex-wrap gap-4 justify-center mt-8">
+                        <a href="/apply/" class="px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold shadow-lg transition flex items-center gap-2">
+                            Apply for Voter ID <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#documents" class="px-8 py-3 bg-white border border-gray-300 rounded-xl font-medium text-gray-700 hover:border-emerald-400 hover:text-emerald-600 transition">
+                            Documents required <i class="fas fa-file-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Voter ID Section -->
+        <section id="overview" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">About <span class="gradient-text">Voter ID Card</span></h2>
+                        <div class="w-20 h-1 bg-emerald-500 rounded-full mt-3 mb-5"></div>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            The Voter ID card, officially known as the Elector's Photo Identity Card (EPIC), is an identity document issued by the Election Commission of India to adult citizens of India who are eligible to vote. It serves as both a voting credential and a widely accepted proof of identity and address.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            The EPIC card was introduced to prevent electoral fraud and impersonation. Any Indian citizen aged 18 years or above is eligible to register as a voter. The card contains the voter's photograph, name, age, address, and unique EPIC number.
+                        </p>
+                        <div class="mt-6 flex flex-wrap gap-4">
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">New Registration</span></div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">Correction/Update</span></div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">Transfer/Migration</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-8 shadow-lg">
+                        <div class="text-center">
+                            <i class="fas fa-id-card text-6xl text-emerald-600 mb-4"></i>
+                            <div class="text-3xl font-bold text-emerald-600 mb-2">EPIC Number Format</div>
+                            <p class="text-gray-600 mb-4">Unique 10-digit Elector's Photo Identity Card Number</p>
+                            <div class="bg-white rounded-xl p-4 shadow-md">
+                                <p class="font-mono text-lg font-semibold text-gray-800">ABC1234567</p>
+                                <p class="text-xs text-gray-500 mt-2">State Code | Serial Number | Check Digit</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Process Steps -->
+       <section id="process" class="py-12 sm:py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+
+    <!-- Heading -->
+    <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
+        Application <span class="text-emerald-600">Process</span>
+      </h2>
+      <div class="w-20 sm:w-24 h-1 bg-emerald-500 mx-auto rounded-full mt-3"></div>
+      <p class="text-gray-500 mt-4 text-sm sm:text-base">
+        Simple 4-step process to get your Voter ID Card
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Step 1 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-emerald-600">1</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-emerald-600 mb-2">25%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Fill Online Form</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Submit Form 6 with basic details
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-emerald-600">2</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-emerald-600 mb-2">50%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Upload Documents</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Upload photo, address & age proof
+        </p>
+      </div>
+
+      <!-- Step 3 (FIXED) -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-emerald-600">3</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-emerald-600 mb-2">75%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Make Payment</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Payment options will be shown after document verification
+        </p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-green-600">4</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-green-600 mb-2">100%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Get Voter ID Card</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Receive EPIC at your doorstep
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+        <!-- Why Choose Us + Value of Voter ID -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Why Choose Us -->
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800">Why <span class="gradient-text">Choose Us</span>?</h2>
+                        <div class="w-20 h-1 bg-emerald-500 rounded-full mt-3 mb-5"></div>
+                        <p class="text-gray-600 mb-6">Our expertise lies in delivering what we commit. We make sure to get the things done and believe in the motto that customer is the Boss. We have an endlessly increasing and proud list of satisfied clients.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3"><i class="fas fa-headset text-emerald-600 text-xl"></i><span>Dedicated Support</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-sync-alt text-emerald-600 text-xl"></i><span>Regular Updates</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-bolt text-emerald-600 text-xl"></i><span>Quick Service</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-phone-alt text-emerald-600 text-xl"></i><span>Call Assistance</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-smile text-emerald-600 text-xl"></i><span>Hassle Free</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-file-pdf text-emerald-600 text-xl"></i><span>e-EPIC Support</span></div>
+                        </div>
+                    </div>
+                    <!-- Importance of Voter ID -->
+                    <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Importance of <span class="gradient-text">Voter ID Card</span></h3>
+                        <p class="text-gray-600 mb-4">A Voter ID card is more than just a voting credential. It serves multiple purposes in daily life.</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Cast vote in elections</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Valid government ID proof</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Address proof for documents</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Essential for passport/pan</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Bank account opening</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Government scheme eligibility</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documents Required Section -->
+        <section id="documents" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Documents Required for <span class="gradient-text">Voter ID</span></h2>
+                    <div class="w-24 h-1 bg-emerald-500 mx-auto rounded-full mt-3"></div>
+                    <p class="text-gray-500 mt-4">Essential documents for new registration, correction, or transfer</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Identity Proof -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-emerald-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-id-card text-emerald-600 mr-2"></i>Identity Proof (Any One)</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ Passport</li>
+                            <li>✓ PAN Card</li>
+                            <li>✓ Driving Licence</li>
+                            <li>✓ Government ID Card</li>
+                            <li>✓ Aadhaar Card</li>
+                        </ul>
+                    </div>
+
+                    <!-- Address Proof -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-emerald-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-home text-emerald-600 mr-2"></i>Address Proof (Any One)</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ Aadhaar Card</li>
+                            <li>✓ Passport</li>
+                            <li>✓ Driving Licence</li>
+                            <li>✓ Bank Passbook</li>
+                            <li>✓ Utility Bill (Electricity/Water)</li>
+                            <li>✓ Rent Agreement</li>
+                        </ul>
+                    </div>
+
+                    <!-- Age Proof & Photograph -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-emerald-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-calendar-alt text-emerald-600 mr-2"></i>Age Proof & Others</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ Birth Certificate</li>
+                            <li>✓ Class 10 Certificate</li>
+                            <li>✓ Passport</li>
+                            <li>✓ Recent Passport Size Photograph (2 copies)</li>
+                            <li>✓ Form 6 (for new registration)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Additional Info Box -->
+                <div class="mt-8 bg-emerald-50 rounded-xl p-5 border border-emerald-200">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-info-circle text-emerald-600 text-xl mt-0.5"></i>
+                        <div>
+                            <p class="text-sm text-gray-700"><strong class="font-semibold">Eligibility Criteria:</strong> Indian citizen, aged 18 years or above on the qualifying date (January 1 of the year), ordinarily resident of the constituency where applying.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Types of Applications -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Types of <span class="gradient-text">Voter ID Applications</span></h2>
+                    <div class="w-24 h-1 bg-emerald-500 mx-auto rounded-full mt-3"></div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-user-plus text-2xl text-emerald-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">New Registration (Form 6)</h3>
+                        <p class="text-gray-500 text-sm">For first-time voters who have turned 18 or newly shifted to a constituency. Includes photo and biometric capture.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-edit text-2xl text-emerald-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Correction (Form 8)</h3>
+                        <p class="text-gray-500 text-sm">For changes in name, address, date of birth, photo, or any other details in existing EPIC card.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-exchange-alt text-2xl text-emerald-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Transfer/Migration</h3>
+                        <p class="text-gray-500 text-sm">For voters shifting from one constituency to another. Requires deletion from previous roll.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits of Voter ID -->
+        <section id="benefits" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Benefits of Having a <span class="gradient-text">Voter ID Card</span></h2>
+                    <div class="w-24 h-1 bg-emerald-500 mx-auto rounded-full mt-3"></div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-vote-yea text-emerald-600 text-2xl"></i><div><h3 class="font-semibold">Right to Vote</h3><p class="text-sm text-gray-500">Participate in democratic process and elect your representatives</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-passport text-emerald-600 text-2xl"></i><div><h3 class="font-semibold">Government ID Proof</h3><p class="text-sm text-gray-500">Accepted as valid identity proof across India</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-home text-emerald-600 text-2xl"></i><div><h3 class="font-semibold">Address Proof</h3><p class="text-sm text-gray-500">Widely accepted for address verification</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-university text-emerald-600 text-2xl"></i><div><h3 class="font-semibold">Bank Account Opening</h3><p class="text-sm text-gray-500">Essential KYC document for financial services</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-mobile-alt text-emerald-600 text-2xl"></i><div><h3 class="font-semibold">SIM Card Registration</h3><p class="text-sm text-gray-500">Required for new mobile connection</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-file-alt text-emerald-600 text-2xl"></i><div><h3 class="font-semibold">Government Scheme Eligibility</h3><p class="text-sm text-gray-500">Required for many welfare schemes</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Apply Now Section (CTA) -->
+        <section id="apply" class="py-16 bg-gradient-to-r from-emerald-700 to-green-800 text-white">
+            <div class="max-w-4xl mx-auto px-5 md:px-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Get Your Voter ID Card?</h2>
+                <p class="text-emerald-100 mb-8">Get expert assistance for new Voter ID registration, corrections, or transfer. We help with form filling, document verification & tracking.</p>
+                <a href="/apply/" class="inline-flex items-center gap-2 bg-white text-emerald-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition shadow-lg">
+                    Apply for Voter ID <i class="fas fa-arrow-right"></i>
+                </a>
+                <p class="text-emerald-200 text-sm mt-6">*T&C Apply | Assisted service, not a government website</p>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="py-8 bg-gray-100">
+            <div class="max-w-4xl mx-auto px-5 text-center">
+                <p class="text-xs text-gray-500">Disclaimer: This is an assisted service platform, not a government website. We provide professional assistance for Voter ID applications. All trademarks belong to the Election Commission of India.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 pt-12 pb-6">
+        <div class="max-w-7xl mx-auto px-5 md:px-10 text-center">
+            <p class="text-sm">© 2026 Samarth Seva | Voter ID Registration Assistance</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        }
+
+        // Close menu on scroll
+        window.addEventListener("scroll", () => {
+            if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.add("hidden");
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === "#") return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    if (mobileMenu) mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Samarth Seva | Government Service Portal</title>
+    <!-- Tailwind CSS + Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #f8fafc; }
+        .service-card, .service-list-item { transition: all 0.25s ease; cursor: pointer; }
+        .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1); }
+        .service-list-item:hover { background-color: #f3f4f6; transform: translateX(6px); border-left-color: #4f46e5; }
+        input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); border-color: #4f46e5; outline: none; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #a5b4fc; border-radius: 8px; }
+        body,html{
+            overflow-x: hidden;
+        }
+        
+
+/* Universal Blink Animation */
+.apply-btn{
+    animation: blinkGlow 1.3s infinite;
+}
+
+@keyframes blinkGlow{
+    0%{
+        transform: scale(1);
+        opacity: 1;
+    }
+    50%{
+        transform: scale(1.06);
+        opacity: 0.85;
+        filter: brightness(1.35);
+    }
+    100%{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+    </style>
+    </head>
+<body class="antialiased">
+{% if request.path == "/" %}
+    {% include 'components/nav.html' %}
+{% else %}
+    {% include 'components/nav2.html' %}
+{% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+    
+
+    
+     <script>
+      
+        const SERVICE_LINKS = {
+            gst: "./gst.html",        // ← GST form page link
+            dl: "./dl.html",          // ← Driving Licence form page link
+            voter: "./voter.html",              // ← Voter ID form page link
+            udyam: "./udyam.html",         // ← Udyam Aadhaar form page link
+            gumasta: "./gumasta.html",  // ← Gumasta License form page link
+            "street-vendor": "./streetvendor.html",
+            domicile: "./domicile.html",
+            gazette: "./gazette.html"
+        };
+        
+      
+        // Function to handle navigation
+        function navigateToService(serviceKey) {
+            const link = SERVICE_LINKS[serviceKey];
+            if (link && link !== "#" && link !== "") {
+                window.location.href = link;
+            } else {
+                // Fallback alert if link not configured
+                alert(`Service page not configured yet.\n\nPlease add your link for "${serviceKey}" in the SERVICE_LINKS section at the bottom of the code.\n\nCurrent link: ${link}`);
+            }
+        }
+        
+        // Attach click handlers to ALL cards (anchor tags with .service-card)
+        // document.querySelectorAll('.service-card').forEach(card => {
+        //     card.addEventListener('click', (e) => {
+        //         e.preventDefault();
+        //         const service = card.getAttribute('data-service');
+        //         if (service) navigateToService(service);
+        //     });
+        // });
+        
+        // Attach click handlers to LIST ITEMS (li elements)
+        document.querySelectorAll('.service-list-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const service = item.getAttribute('data-service');
+                if (service) navigateToService(service);
+            });
+        });
+        
+        // Attach click handlers to footer service links
+        document.querySelectorAll('footer li[data-service]').forEach(link => {
+            link.addEventListener('click', () => {
+                const service = link.getAttribute('data-service');
+                if (service) navigateToService(service);
+            });
+        });
+        
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+        
+        // Close menu on scroll
+        window.addEventListener("scroll", () => {
+            if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.add("hidden");
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === "#") return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    // Close mobile menu if open
+                    mobileMenu?.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+{% extends 'base.html'%}
+{% if request.path == "/" %}
+    {% include 'components/nav.html' %}
+{% else %}
+    {% include 'components/nav2.html' %}
+{% endif %}
+
+{% block content %}
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #f8fafc; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        .progress-step { transition: all 0.3s ease; }
+        .progress-step:hover { transform: translateY(-4px); }
+        .doc-card { transition: all 0.25s ease; }
+        .doc-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        .gradient-text {
+            background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .bg-gradient-amber { background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #fcd34d; border-radius: 8px; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fadeInUp 0.5s ease-out forwards; }
+        body,html {
+            overflow-x: hidden;
+        }
+    </style>
+
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-amber-50 via-white to-orange-50 py-12 md:py-20">
+            <div class="absolute top-0 right-0 w-80 h-80 bg-amber-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-orange-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-3xl mx-auto">
+                    <div class="inline-flex items-center gap-2 bg-amber-100 text-amber-800 rounded-full px-4 py-1.5 text-sm font-semibold mb-4">
+                        <i class="fas fa-industry text-amber-600"></i>
+                        <span>Online Udyam Registration</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 leading-tight">
+                        Udyam <span class="gradient-text">Registration</span>
+                    </h1>
+                    <p class="text-gray-600 text-lg mt-4">Register your business as MSME online. Get Udyam Registration Certificate instantly. Avail government benefits, subsidies & easier loans.</p>
+                    <div class="flex flex-wrap gap-4 justify-center mt-8">
+                        <a href="/apply/" class="px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-semibold shadow-lg transition flex items-center gap-2">
+                            Register for Udyam <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#documents" class="px-8 py-3 bg-white border border-gray-300 rounded-xl font-medium text-gray-700 hover:border-amber-400 hover:text-amber-600 transition">
+                            Documents required <i class="fas fa-file-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Udyam Registration Section -->
+        <section id="overview" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">About <span class="gradient-text">Udyam Registration</span></h2>
+                        <div class="w-20 h-1 bg-amber-500 rounded-full mt-3 mb-5"></div>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            Udyam Registration is the new process for MSME registration introduced by the Ministry of Micro, Small and Medium Enterprises, Government of India. It replaced the earlier Udyog Aadhaar Memorandum (UAM) system from July 1, 2020.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            Any business entity classified as Micro, Small or Medium Enterprise based on investment in plant & machinery or equipment and annual turnover can register under Udyam. The registration is completely online, free of cost, and provides a unique Udyam Registration Number (URN).
+                        </p>
+                        <div class="mt-6 flex flex-wrap gap-4">
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">Micro Enterprise</span></div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">Small Enterprise</span></div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">Medium Enterprise</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 shadow-lg">
+                        <div class="text-center">
+                            <i class="fas fa-chart-line text-6xl text-amber-600 mb-4"></i>
+                            <div class="text-3xl font-bold text-amber-600 mb-2">Classification Criteria</div>
+                            <div class="space-y-3 text-left mt-4">
+                                <div class="bg-white rounded-lg p-3 shadow-sm"><span class="font-semibold">Micro:</span> Investment < ₹1 Cr & Turnover < ₹5 Cr</div>
+                                <div class="bg-white rounded-lg p-3 shadow-sm"><span class="font-semibold">Small:</span> Investment < ₹10 Cr & Turnover < ₹50 Cr</div>
+                                <div class="bg-white rounded-lg p-3 shadow-sm"><span class="font-semibold">Medium:</span> Investment < ₹50 Cr & Turnover < ₹250 Cr</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Process Steps -->
+       <section id="process" class="py-12 sm:py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+
+    <!-- Heading -->
+    <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
+        Registration <span class="text-amber-600">Process</span>
+      </h2>
+      <div class="w-20 sm:w-24 h-1 bg-amber-500 mx-auto rounded-full mt-3"></div>
+      <p class="text-gray-500 mt-4 text-sm sm:text-base">
+        Simple 4-step process to get your Udyam Registration Certificate
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Step 1 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-amber-600">1</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-amber-600 mb-2">25%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Fill Online Form</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Submit business & Aadhaar details
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-amber-600">2</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-amber-600 mb-2">50%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Upload Documents</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          PAN, Aadhaar & business proof
+        </p>
+      </div>
+
+      <!-- Step 3 (FIXED) -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-amber-600">3</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-amber-600 mb-2">75%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Make Payment</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Payment options will be shown after document verification
+        </p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-green-600">4</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-green-600 mb-2">100%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Get Udyam Certificate</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Instant certificate download
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+        <!-- Why Choose Us + Value of Udyam -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Why Choose Us -->
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800">Why <span class="gradient-text">Choose Us</span>?</h2>
+                        <div class="w-20 h-1 bg-amber-500 rounded-full mt-3 mb-5"></div>
+                        <p class="text-gray-600 mb-6">Our expertise lies in delivering what we commit. We make sure to get the things done and believe in the motto that customer is the Boss. We have an endlessly increasing and proud list of satisfied clients.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3"><i class="fas fa-headset text-amber-600 text-xl"></i><span>Dedicated Support</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-sync-alt text-amber-600 text-xl"></i><span>Regular Updates</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-bolt text-amber-600 text-xl"></i><span>Quick Service</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-phone-alt text-amber-600 text-xl"></i><span>Call Assistance</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-smile text-amber-600 text-xl"></i><span>Hassle Free</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-file-certificate text-amber-600 text-xl"></i><span>Instant Certificate</span></div>
+                        </div>
+                    </div>
+                    <!-- Value of Udyam Registration -->
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Importance of <span class="gradient-text">Udyam Registration</span></h3>
+                        <p class="text-gray-600 mb-4">Udyam Registration provides official recognition as MSME and unlocks numerous government benefits.</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Collateral-free bank loans</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Subsidy on patent registration</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Lower interest rates</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Tax exemptions under GST</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Priority in government tenders</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Protection against delayed payments</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documents Required Section -->
+        <section id="documents" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Documents Required for <span class="gradient-text">Udyam Registration</span></h2>
+                    <div class="w-24 h-1 bg-amber-500 mx-auto rounded-full mt-3"></div>
+                    <p class="text-gray-500 mt-4">Simple documentation - mostly based on self-declaration</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Identity & Business Proof -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-amber-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-id-card text-amber-600 mr-2"></i>Identity & Business Proof</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ Aadhaar Card (of Proprietor/Partner/Director)</li>
+                            <li>✓ PAN Card (of Business/Individual)</li>
+                            <li>✓ Business Name & Address</li>
+                            <li>✓ GSTIN (if applicable)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Investment & Turnover Details -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-amber-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-chart-simple text-amber-600 mr-2"></i>Investment & Turnover Details</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ Investment in Plant & Machinery/Equipment</li>
+                            <li>✓ Annual Turnover of Business</li>
+                            <li>✓ Bank Account Details (optional)</li>
+                            <li>✓ Previous UAM Number (if any)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Additional for Partnership/Company -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-amber-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-building text-amber-600 mr-2"></i>For Partnership/Company</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ Partnership Deed / COI</li>
+                            <li>✓ Aadhaar & PAN of all Partners/Directors</li>
+                            <li>✓ Authorization Letter</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Additional Info Box -->
+                <div class="mt-8 bg-amber-50 rounded-xl p-5 border border-amber-200">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-info-circle text-amber-600 text-xl mt-0.5"></i>
+                        <div>
+                            <p class="text-sm text-gray-700"><strong class="font-semibold">Note:</strong> Udyam Registration is completely free of cost. No fees are charged by the government. Registration is based on self-declaration, and no documents need to be uploaded to the Udyam portal (only Aadhaar number is required). However, we recommend keeping supporting documents ready.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Types of Enterprises -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Classification of <span class="gradient-text">MSME Enterprises</span></h2>
+                    <div class="w-24 h-1 bg-amber-500 mx-auto rounded-full mt-3"></div>
+                    <p class="text-gray-500 mt-4">Revised criteria effective from July 1, 2020</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition border-b-4 border-amber-500">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-microphone text-2xl text-amber-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Micro Enterprise</h3>
+                        <p class="text-gray-500 text-sm">Investment in Plant & Machinery or Equipment: <strong>Not more than ₹1 Crore</strong></p>
+                        <p class="text-gray-500 text-sm mt-2">Annual Turnover: <strong>Not more than ₹5 Crore</strong></p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition border-b-4 border-amber-600">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-chart-simple text-2xl text-amber-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Small Enterprise</h3>
+                        <p class="text-gray-500 text-sm">Investment: <strong>Not more than ₹10 Crore</strong></p>
+                        <p class="text-gray-500 text-sm mt-2">Annual Turnover: <strong>Not more than ₹50 Crore</strong></p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition border-b-4 border-orange-600">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-building text-2xl text-amber-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Medium Enterprise</h3>
+                        <p class="text-gray-500 text-sm">Investment: <strong>Not more than ₹50 Crore</strong></p>
+                        <p class="text-gray-500 text-sm mt-2">Annual Turnover: <strong>Not more than ₹250 Crore</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits of Udyam Registration -->
+        <section id="benefits" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Benefits of <span class="gradient-text">Udyam Registration</span></h2>
+                    <div class="w-24 h-1 bg-amber-500 mx-auto rounded-full mt-3"></div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-rupee-sign text-amber-600 text-2xl"></i><div><h3 class="font-semibold">Collateral-free Loans</h3><p class="text-sm text-gray-500">Easier access to credit under CGTMSE scheme</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-percent text-amber-600 text-2xl"></i><div><h3 class="font-semibold">Subsidies & Concessions</h3><p class="text-sm text-gray-500">Subsidy on patent, trademark, and ISO certification</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-file-invoice text-amber-600 text-2xl"></i><div><h3 class="font-semibold">Tax Benefits</h3><p class="text-sm text-gray-500">Exemption under Direct Tax Laws & GST benefits</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-gavel text-amber-600 text-2xl"></i><div><h3 class="font-semibold">Protection Against Delayed Payments</h3><p class="text-sm text-gray-500">Right to interest on delayed payments from buyers</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-file-signature text-amber-600 text-2xl"></i><div><h3 class="font-semibold">Government Tenders</h3><p class="text-sm text-gray-500">Preference in public procurement & MSE set-aside</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-charging-station text-amber-600 text-2xl"></i><div><h3 class="font-semibold">Electricity & Power Subsidies</h3><p class="text-sm text-gray-500">Concessions on power bills in many states</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Apply Now Section (CTA) -->
+        <section id="apply" class="py-16 bg-gradient-to-r from-amber-700 to-orange-800 text-white">
+            <div class="max-w-4xl mx-auto px-5 md:px-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Register Your Business as MSME?</h2>
+                <p class="text-amber-100 mb-8">Get your Udyam Registration Certificate instantly. Avail government benefits, subsidies, and easier access to loans.</p>
+                <a href="/apply/" class="inline-flex items-center gap-2 bg-white text-amber-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition shadow-lg">
+                    Register for Udyam <i class="fas fa-arrow-right"></i>
+                </a>
+                <p class="text-amber-200 text-sm mt-6">*T&C Apply | Assisted service, not a government website</p>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="py-8 bg-gray-100">
+            <div class="max-w-4xl mx-auto px-5 text-center">
+                <p class="text-xs text-gray-500">Disclaimer: This is an assisted service platform, not a government website. We provide professional assistance for Udyam Registration. All trademarks belong to the Ministry of MSME, Government of India.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 pt-12 pb-6">
+        <div class="max-w-7xl mx-auto px-5 md:px-10 text-center">
+            <p class="text-sm">© 2026 Samarth Seva | Udyam Registration (MSME) Assistance</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        }
+
+        // Close menu on scroll
+        window.addEventListener("scroll", () => {
+            if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.add("hidden");
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === "#") return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    if (mobileMenu) mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+{% endblock %}

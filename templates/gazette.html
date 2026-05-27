@@ -1,0 +1,524 @@
+{% extends 'base.html'%}
+{% if request.path == "/" %}
+    {% include 'components/nav.html' %}
+{% else %}
+    {% include 'components/nav2.html' %}
+{% endif %}
+
+{% block content %}
+
+<style>
+body{font-family: 'Inter', sans-serif; background:#f8fafc;}
+.gradient-text{
+background:linear-gradient(135deg,#db2777,#ec4899);
+
+color:transparent;
+}
+</style>
+
+
+
+
+
+<!-- HERO -->
+<section class="relative overflow-hidden bg-gradient-to-br from-pink-50 via-white to-rose-50 py-12 md:py-20">
+    
+    <!-- Background blobs -->
+    <div class="absolute top-0 right-0 w-80 h-80 bg-pink-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-rose-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-5 md:px-10">
+        <div class="text-center max-w-3xl mx-auto">
+
+            <!-- Top Tag -->
+            <div class="inline-flex items-center gap-2 bg-pink-100 text-pink-800 rounded-full px-4 py-1.5 text-sm font-semibold mb-4">
+                <i class="fas fa-newspaper text-pink-600"></i>
+                <span>Online Gazette Notification Service</span>
+            </div>
+
+            <!-- Heading -->
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 leading-tight">
+                Gazette <span class="text-pink-600">Notification</span>
+            </h1>
+
+            <!-- Description -->
+            <p class="text-gray-600 text-lg mt-4">
+                Publish your name change or other legal updates in the Official Gazette of India with expert assistance. 
+                Fast, simple and fully guided process.
+            </p>
+
+            <!-- Buttons -->
+            <div class="flex flex-wrap gap-4 justify-center mt-8">
+
+                <a href="/apply/" class="px-8 py-3 bg-pink-600 hover:bg-pink-700 text-white rounded-xl font-semibold shadow-lg transition flex items-center gap-2">
+                    Apply for Gazette <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a href="#documents" class="px-8 py-3 bg-white border border-gray-300 rounded-xl font-medium text-gray-700 hover:border-pink-400 hover:text-pink-600 transition">
+                    Documents required <i class="fas fa-file-alt"></i>
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- What is Gazette Notification Section -->
+<section id="overview" class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-5 md:px-10">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+
+      <!-- Left Content -->
+      <div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">
+          What is <span class="text-pink-600">Gazette Notification</span>?
+        </h2>
+        <div class="w-20 h-1 bg-pink-500 rounded-full mt-3 mb-5"></div>
+
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Gazette Notification is an official publication by the Government of India used to announce legal information such as name change, address change, or other public notices. It acts as a valid legal proof of your updated identity.
+        </p>
+
+        <p class="text-gray-600 leading-relaxed">
+          Publishing your name change in the Gazette is mandatory for updating your name in official documents like Aadhaar, PAN Card, Passport, and other government records. It ensures legal recognition and avoids future complications.
+        </p>
+
+        <div class="mt-6 flex flex-wrap gap-4">
+          <div class="flex items-center gap-2">
+            <i class="fas fa-check-circle text-green-500"></i>
+            <span class="text-sm">Legal Name Change Proof</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <i class="fas fa-check-circle text-green-500"></i>
+            <span class="text-sm">Government Approved</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <i class="fas fa-check-circle text-green-500"></i>
+            <span class="text-sm">Valid for All Documents</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Box -->
+      <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-8 shadow-lg">
+        <div class="text-center">
+          <i class="fas fa-newspaper text-5xl text-pink-600 mb-4"></i>
+
+          <div class="text-2xl font-bold text-pink-600 mb-2">
+            Official Publication
+          </div>
+
+          <p class="text-gray-600 mb-4">
+            Published in Government Gazette of India
+          </p>
+
+          <div class="bg-white rounded-xl p-4 shadow-md">
+            <p class="font-semibold text-gray-800">Used For:</p>
+            <p class="text-sm text-gray-500 mt-2">
+              Name Change | Spelling Correction | Marriage Name Update | Legal Identity Update
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Gazette Application Process -->
+<section id="process" class="py-12 sm:py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+
+    <!-- Heading -->
+    <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
+        Application <span class="text-pink-600">Process</span>
+      </h2>
+      <div class="w-20 sm:w-24 h-1 bg-pink-500 mx-auto rounded-full mt-3"></div>
+      <p class="text-gray-500 mt-4 text-sm sm:text-base">
+        Simple 4-step process for Gazette Notification (Name Change)
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Step 1 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition h-full">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-pink-600">1</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-pink-600 mb-2">25%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Fill Application Form</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Submit your name change details
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition h-full">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-pink-600">2</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-pink-600 mb-2">50%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Prepare Affidavit</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Create legal affidavit for name change
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition h-full">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-pink-600">3</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-pink-600 mb-2">75%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Newspaper Publication</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Publish name change in newspaper
+        </p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition h-full">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-green-600">4</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-green-600 mb-2">100%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Gazette Publication</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Get official Gazette Notification certificate
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us + Importance of Gazette -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-5 md:px-10">
+    <div class="grid md:grid-cols-2 gap-12">
+
+      <!-- Why Choose Us -->
+      <div>
+        <h2 class="text-3xl font-bold text-gray-800">
+          Why <span class="text-pink-600">Choose Us</span>?
+        </h2>
+        <div class="w-20 h-1 bg-pink-500 rounded-full mt-3 mb-5"></div>
+
+        <p class="text-gray-600 mb-6">
+          We provide complete assistance for Gazette Notification with a smooth and hassle-free process. From affidavit preparation to final publication, our experts handle everything for you.
+        </p>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex items-center gap-3">
+            <i class="fas fa-headset text-pink-600 text-xl"></i>
+            <span>Dedicated Support</span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <i class="fas fa-sync-alt text-pink-600 text-xl"></i>
+            <span>Regular Updates</span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <i class="fas fa-bolt text-pink-600 text-xl"></i>
+            <span>Fast Processing</span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <i class="fas fa-phone-alt text-pink-600 text-xl"></i>
+            <span>Call Assistance</span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <i class="fas fa-smile text-pink-600 text-xl"></i>
+            <span>Hassle Free</span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <i class="fas fa-file-alt text-pink-600 text-xl"></i>
+            <span>End-to-End Service</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Importance of Gazette -->
+      <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-8">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">
+          Importance of <span class="text-pink-600">Gazette Notification</span>
+        </h3>
+
+        <p class="text-gray-600 mb-4">
+          Gazette Notification is essential for legally updating your name and identity across all official records. It acts as valid proof recognized by government authorities.
+        </p>
+
+        <div class="grid grid-cols-2 gap-3">
+
+          <div class="flex items-start gap-2">
+            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+            <span class="text-sm">Legal Name Change Proof</span>
+          </div>
+
+          <div class="flex items-start gap-2">
+            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+            <span class="text-sm">Update Aadhaar & PAN</span>
+          </div>
+
+          <div class="flex items-start gap-2">
+            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+            <span class="text-sm">Passport Correction</span>
+          </div>
+
+          <div class="flex items-start gap-2">
+            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+            <span class="text-sm">Bank & Legal Records Update</span>
+          </div>
+
+          <div class="flex items-start gap-2">
+            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+            <span class="text-sm">Government Approved</span>
+          </div>
+
+          <div class="flex items-start gap-2">
+            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+            <span class="text-sm">Avoid Legal Issues</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Documents Required for Gazette Notification -->
+<section id="documents" class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-5 md:px-10">
+
+    <!-- Heading -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800">
+        Documents Required for <span class="text-pink-600">Gazette Notification</span>
+      </h2>
+      <div class="w-24 h-1 bg-pink-500 mx-auto rounded-full mt-3"></div>
+      <p class="text-gray-500 mt-4">
+        Required documents for Name Change / Gazette Publication
+      </p>
+    </div>
+
+    <!-- Documents Grid -->
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- Personal Documents -->
+      <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-pink-500">
+        <h3 class="font-bold text-lg mb-3">
+          <i class="fas fa-user text-pink-600 mr-2"></i>Personal Documents
+        </h3>
+        <ul class="space-y-2 text-gray-600">
+          <li>✓ Aadhaar Card</li>
+          <li>✓ PAN Card</li>
+          <li>✓ Passport Size Photographs</li>
+          <li>✓ Identity Proof (Any Government ID)</li>
+        </ul>
+      </div>
+
+      <!-- Affidavit & Application -->
+      <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-pink-500">
+        <h3 class="font-bold text-lg mb-3">
+          <i class="fas fa-file-alt text-pink-600 mr-2"></i>Affidavit & Application
+        </h3>
+        <ul class="space-y-2 text-gray-600">
+          <li>✓ Name Change Affidavit</li>
+          <li>✓ Application Form</li>
+          <li>✓ Old Name & New Name Details</li>
+          <li>✓ Reason for Name Change</li>
+        </ul>
+      </div>
+
+      <!-- Publication Documents -->
+      <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-pink-500">
+        <h3 class="font-bold text-lg mb-3">
+          <i class="fas fa-newspaper text-pink-600 mr-2"></i>Publication Documents
+        </h3>
+        <ul class="space-y-2 text-gray-600">
+          <li>✓ Newspaper Publication Copy</li>
+          <li>✓ Digital CD / Soft Copy (if required)</li>
+          <li>✓ Covering Letter for Gazette</li>
+          <li>✓ Witness / Declaration (if applicable)</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Info Box -->
+    <div class="mt-8 bg-pink-50 rounded-xl p-5 border border-pink-200">
+      <div class="flex items-start gap-3">
+        <i class="fas fa-info-circle text-pink-600 text-xl mt-0.5"></i>
+        <div>
+          <p class="text-sm text-gray-700">
+            <strong class="font-semibold">Note:</strong>
+            Document requirements may vary slightly depending on your case (minor, marriage, spelling correction, etc.). Our team will guide you step-by-step for a smooth Gazette publication process.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Benefits of Gazette Notification -->
+<section id="benefits" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-5 md:px-10">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">
+                Benefits of <span class="text-pink-600">Gazette Notification</span>
+            </h2>
+            <div class="w-24 h-1 bg-pink-500 mx-auto rounded-full mt-3"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div class="flex gap-3 p-4 rounded-xl hover:bg-pink-50 transition">
+                <i class="fas fa-gavel text-pink-600 text-2xl"></i>
+                <div>
+                    <h3 class="font-semibold">Legal Name Change Proof</h3>
+                    <p class="text-sm text-gray-500">
+                        Provides official government proof of your name change
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex gap-3 p-4 rounded-xl hover:bg-pink-50 transition">
+                <i class="fas fa-id-card text-pink-600 text-2xl"></i>
+                <div>
+                    <h3 class="font-semibold">Update Documents Easily</h3>
+                    <p class="text-sm text-gray-500">
+                        Helps update Aadhaar, PAN, Passport, and other IDs
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex gap-3 p-4 rounded-xl hover:bg-pink-50 transition">
+                <i class="fas fa-shield-alt text-pink-600 text-2xl"></i>
+                <div>
+                    <h3 class="font-semibold">Legal Protection</h3>
+                    <p class="text-sm text-gray-500">
+                        Protects you from future legal disputes related to identity
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex gap-3 p-4 rounded-xl hover:bg-pink-50 transition">
+                <i class="fas fa-university text-pink-600 text-2xl"></i>
+                <div>
+                    <h3 class="font-semibold">Accepted Everywhere</h3>
+                    <p class="text-sm text-gray-500">
+                        Valid across banks, government offices, and institutions
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex gap-3 p-4 rounded-xl hover:bg-pink-50 transition">
+                <i class="fas fa-globe text-pink-600 text-2xl"></i>
+                <div>
+                    <h3 class="font-semibold">Global Recognition</h3>
+                    <p class="text-sm text-gray-500">
+                        Required for visa, passport, and international documentation
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex gap-3 p-4 rounded-xl hover:bg-pink-50 transition">
+                <i class="fas fa-check-circle text-pink-600 text-2xl"></i>
+                <div>
+                    <h3 class="font-semibold">Permanent Record</h3>
+                    <p class="text-sm text-gray-500">
+                        Your name change is permanently recorded in government records
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Apply Now Section (CTA - Gazette) -->
+<section id="apply" class="py-16 bg-gradient-to-r from-pink-600 to-rose-700 text-white">
+    <div class="max-w-4xl mx-auto px-5 md:px-10 text-center">
+        
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Ready to Publish Your Name in Gazette?
+        </h2>
+        
+        <p class="text-pink-100 mb-8">
+            Get your name change published in Government Gazette with expert assistance in just a few simple steps
+        </p>
+        
+        <a href="/apply/" class="inline-flex items-center gap-2 bg-white text-pink-600 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition shadow-lg">
+            Apply for Gazette Notification <i class="fas fa-arrow-right"></i>
+        </a>
+        
+        <p class="text-pink-200 text-sm mt-6">
+            *T&C Apply | Assisted service, not a government website
+        </p>
+        
+    </div>
+</section>
+<!-- Disclaimer -->
+<section class="py-8 bg-gray-100">
+    <div class="max-w-4xl mx-auto px-5 text-center">
+        <p class="text-xs text-gray-500">
+            Disclaimer: This is an assisted service platform, not a government website. 
+            We provide professional assistance for Gazette Notification (Name Change Publication). 
+            All trademarks belong to respective government authorities.
+        </p>
+    </div>
+</section>
+
+<footer class="bg-gray-900 text-gray-300 pt-12 pb-6">
+    <div class="max-w-7xl mx-auto px-5 md:px-10 text-center">
+        <p class="text-sm">
+            © 2026 Samarth Seva | Gazette Notification (Name Change) Assistance
+        </p>
+    </div>
+</footer>
+<!-- Script -->
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  // Mobile menu toggle
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+  // Close menu on scroll
+  window.addEventListener("scroll", () => {
+    if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+      mobileMenu.classList.add("hidden");
+    }
+  });
+
+  // Smooth scroll (optional but useful)
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === "#") return;
+
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+
+        if (mobileMenu) mobileMenu.classList.add('hidden');
+      }
+    });
+  });
+</script>
+
+{% endblock %}

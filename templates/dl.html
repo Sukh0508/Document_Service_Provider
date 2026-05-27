@@ -1,0 +1,362 @@
+{% extends 'base.html'%}
+{% if request.path == "/" %}
+    {% include 'components/nav.html' %}
+{% else %}
+    {% include 'components/nav2.html' %}
+{% endif %}
+
+{% block content %}
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #f8fafc; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        .progress-step { transition: all 0.3s ease; }
+        .progress-step:hover { transform: translateY(-4px); }
+        .doc-card { transition: all 0.25s ease; }
+        .doc-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .bg-gradient-blue { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #93c5fd; border-radius: 8px; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fadeInUp 0.5s ease-out forwards; }
+        body,html{
+            overflow-x: hidden;
+        }
+    </style>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-12 md:py-20">
+            <div class="absolute top-0 right-0 w-80 h-80 bg-blue-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-indigo-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-3xl mx-auto">
+                    <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-800 rounded-full px-4 py-1.5 text-sm font-semibold mb-4">
+                        <i class="fas fa-car-side text-blue-600"></i>
+                        <span>Online Driving Licence Application</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 leading-tight">
+                        Driving Licence 
+                        <span class="gradient-text">Online</span>
+                    </h1>
+                    <p class="text-gray-600 text-lg mt-4">Apply for Learner's Permit or Permanent Driving Licence. Simple process with expert assistance & slot booking support.</p>
+                    <div class="flex flex-wrap gap-4 justify-center mt-8">
+                        <a href="/apply/" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold shadow-lg transition flex items-center gap-2">
+                            Apply for DL Now <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#documents" class="px-8 py-3 bg-white border border-gray-300 rounded-xl font-medium text-gray-700 hover:border-blue-400 hover:text-blue-600 transition">
+                            Documents required <i class="fas fa-file-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Driving Licence Section -->
+        <section id="overview" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">About <span class="gradient-text">Driving Licence</span></h2>
+                        <div class="w-20 h-1 bg-blue-500 rounded-full mt-3 mb-5"></div>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            A Driving Licence is an official document that authorizes an individual to operate motor vehicles on public roads. In India, it is issued by the Regional Transport Office (RTO) and is mandatory for driving any motor vehicle.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            The Motor Vehicles Act, 1988, governs the issuance of driving licences. There are two main types: Learner's Licence (valid for 6 months) and Permanent Driving Licence (valid for 20 years or until age 50, depending on the issuing authority).
+                        </p>
+                        <div class="mt-6 flex flex-wrap gap-4">
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">Learner's Licence</span></div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">Permanent DL</span></div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">International DL</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 shadow-lg">
+                        <div class="text-center">
+                            <i class="fas fa-id-card text-6xl text-blue-600 mb-4"></i>
+                            <div class="text-3xl font-bold text-blue-600 mb-2">DL Number Format</div>
+                            <p class="text-gray-600 mb-4">Unique 16-digit Driving Licence Number</p>
+                            <div class="bg-white rounded-xl p-4 shadow-md">
+                                <p class="font-mono text-lg font-semibold text-gray-800">DL-1420210012345</p>
+                                <p class="text-xs text-gray-500 mt-2">RTO Code | Issue Date | Unique ID</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Process Steps (Progress) -->
+       <section id="process" class="py-12 sm:py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+
+    <!-- Heading -->
+    <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
+        Application <span class="text-blue-600">Process</span>
+      </h2>
+      <div class="w-20 sm:w-24 h-1 bg-blue-500 mx-auto rounded-full mt-3"></div>
+      <p class="text-gray-500 mt-4 text-sm sm:text-base">
+        Simple 4-step process to get your Driving Licence
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Step 1 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-blue-600">1</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-blue-600 mb-2">25%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Fill Online Form</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Submit details & select licence type
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-blue-600">2</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-blue-600 mb-2">50%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Upload Documents</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Submit documents & book test slot
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-blue-600">3</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-blue-600 mb-2">75%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Make Payment</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Payment options will be shown after document verification
+        </p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-green-600">4</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-green-600 mb-2">100%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Get Driving Licence</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Receive DL at your doorstep
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+        <!-- Why Choose Us + Value of DL -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Why Choose Us -->
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800">Why <span class="gradient-text">Choose Us</span>?</h2>
+                        <div class="w-20 h-1 bg-blue-500 rounded-full mt-3 mb-5"></div>
+                        <p class="text-gray-600 mb-6">Our expertise lies in delivering what we commit. We make sure to get the things done and believe in the motto that customer is the Boss. We have an endlessly increasing and proud list of satisfied clients.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3"><i class="fas fa-headset text-blue-600 text-xl"></i><span>Dedicated Support</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-sync-alt text-blue-600 text-xl"></i><span>Regular Updates</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-bolt text-blue-600 text-xl"></i><span>Quick Service</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-phone-alt text-blue-600 text-xl"></i><span>Call Assistance</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-smile text-blue-600 text-xl"></i><span>Hassle Free</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-calendar-check text-blue-600 text-xl"></i><span>Slot Booking Help</span></div>
+                        </div>
+                    </div>
+                    <!-- Value of Driving Licence -->
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Importance of <span class="gradient-text">Driving Licence</span></h3>
+                        <p class="text-gray-600 mb-4">A valid driving licence is essential for legal driving and offers multiple benefits beyond just being a permit.</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Legal authorization to drive</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Valid government ID proof</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Essential for vehicle insurance</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Required for professional driving</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Accepted as address proof</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Valid across India</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documents Required Section -->
+        <section id="documents" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Documents Required for <span class="gradient-text">Driving Licence</span></h2>
+                    <div class="w-24 h-1 bg-blue-500 mx-auto rounded-full mt-3"></div>
+                    <p class="text-gray-500 mt-4">Common documents needed for Learner's & Permanent Driving Licence application</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Age & Identity Proof -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-blue-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-user-check text-blue-600 mr-2"></i>Age & Identity Proof</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ Birth Certificate / Class 10 Certificate</li>
+                            <li>✓ PAN Card</li>
+                            <li>✓ Passport</li>
+                            <li>✓ Voter ID Card</li>
+                            <li>✓ Aadhaar Card</li>
+                        </ul>
+                    </div>
+
+                    <!-- Address Proof -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-blue-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-home text-blue-600 mr-2"></i>Address Proof (Any One)</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ Aadhaar Card</li>
+                            <li>✓ Passport</li>
+                            <li>✓ Voter ID</li>
+                            <li>✓ Electricity Bill</li>
+                            <li>✓ Ration Card</li>
+                            <li>✓ Bank Passbook</li>
+                        </ul>
+                    </div>
+
+                    <!-- Medical & Other -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-blue-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-stethoscope text-blue-600 mr-2"></i>Medical Certificate & Others</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ Medical Certificate (Form 1A & 1)</li>
+                            <li>✓ Passport Size Photographs (3-4 copies)</li>
+                            <li>✓ Learner's Licence (for Permanent DL)</li>
+                            <li>✓ Driving Training Certificate (if applicable)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Additional Info Box -->
+                <div class="mt-8 bg-blue-50 rounded-xl p-5 border border-blue-200">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-info-circle text-blue-600 text-xl mt-0.5"></i>
+                        <div>
+                            <p class="text-sm text-gray-700"><strong class="font-semibold">Note:</strong> For commercial driving licence (Transport Vehicle), additional documents like badge endorsement and commercial training certificate are required. Age requirement: 18 years for LMV, 20 years for transport vehicles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Types of Driving Licence -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Types of <span class="gradient-text">Driving Licence</span></h2>
+                    <div class="w-24 h-1 bg-blue-500 mx-auto rounded-full mt-3"></div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-graduation-cap text-2xl text-blue-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Learner's Licence</h3>
+                        <p class="text-gray-500 text-sm">Valid for 6 months. Must be followed by a driving test for permanent licence. Minimum age: 16 years for geared vehicles, 18 years for others.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-id-card text-2xl text-blue-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Permanent Licence</h3>
+                        <p class="text-gray-500 text-sm">Valid for 20 years or until age 50. Issued after passing the driving test. Requires valid Learner's Licence.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-truck text-2xl text-blue-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Commercial Licence</h3>
+                        <p class="text-gray-500 text-sm">For transport vehicles (trucks, buses, taxis). Additional medical and training requirements. Minimum age: 20 years.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits of Driving Licence -->
+        <section id="benefits" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Benefits of Having a <span class="gradient-text">Driving Licence</span></h2>
+                    <div class="w-24 h-1 bg-blue-500 mx-auto rounded-full mt-3"></div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-gavel text-blue-600 text-2xl"></i><div><h3 class="font-semibold">Legal Compliance</h3><p class="text-sm text-gray-500">Avoid penalties and legal issues while driving</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-shield-alt text-blue-600 text-2xl"></i><div><h3 class="font-semibold">Insurance Validity</h3><p class="text-sm text-gray-500">Required for vehicle insurance claims</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-briefcase text-blue-600 text-2xl"></i><div><h3 class="font-semibold">Employment Opportunities</h3><p class="text-sm text-gray-500">Essential for driving-related jobs</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-passport text-blue-600 text-2xl"></i><div><h3 class="font-semibold">Government ID Proof</h3><p class="text-sm text-gray-500">Accepted as valid identity proof nationwide</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-car text-blue-600 text-2xl"></i><div><h3 class="font-semibold">Drive Anywhere in India</h3><p class="text-sm text-gray-500">Valid across all states without restrictions</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-hand-holding-usd text-blue-600 text-2xl"></i><div><h3 class="font-semibold">Rental Eligibility</h3><p class="text-sm text-gray-500">Required for renting cars or bikes</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Apply Now Section (CTA Form) -->
+        <section id="apply" class="py-16 bg-gradient-to-r from-blue-700 to-indigo-800 text-white">
+            <div class="max-w-4xl mx-auto px-5 md:px-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Get Your Driving Licence?</h2>
+                <p class="text-blue-100 mb-8">Get expert assistance for Learner's or Permanent Driving Licence. We help with form filling, document verification & slot booking.</p>
+                <a href="/apply/" class="inline-flex items-center gap-2 bg-white text-blue-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition shadow-lg">
+                    Apply for Driving Licence <i class="fas fa-arrow-right"></i>
+                </a>
+                <p class="text-blue-200 text-sm mt-6">*T&C Apply | Assisted service, not a government website</p>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="py-8 bg-gray-100">
+            <div class="max-w-4xl mx-auto px-5 text-center">
+                <p class="text-xs text-gray-500">Disclaimer: This is an assisted service platform, not a government website. We provide professional assistance for Driving Licence applications. All trademarks belong to respective authorities (Ministry of Road Transport & Highways, RTO).</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 pt-12 pb-6">
+        <div class="max-w-7xl mx-auto px-5 md:px-10 text-center">
+            <p class="text-sm">© 2026 Samarth Seva | Driving Licence Application Assistance</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        }
+
+        // Close menu on scroll
+        window.addEventListener("scroll", () => {
+            if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.add("hidden");
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === "#") return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    if (mobileMenu) mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+{% endblock %}

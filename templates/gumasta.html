@@ -1,0 +1,376 @@
+{% extends 'base.html'%}
+{% if request.path == "/" %}
+    {% include 'components/nav.html' %}
+{% else %}
+    {% include 'components/nav2.html' %}
+{% endif %}
+
+{% block content %}
+
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #f8fafc; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        .progress-step { transition: all 0.3s ease; }
+        .progress-step:hover { transform: translateY(-4px); }
+        .doc-card { transition: all 0.25s ease; }
+        .doc-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        .gradient-text {
+            background: linear-gradient(135deg, #db2777 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .bg-gradient-pink { background: linear-gradient(135deg, #be185d 0%, #ec4899 100%); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #fbcfe8; border-radius: 8px; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fadeInUp 0.5s ease-out forwards; }
+        body,html {
+            overflow-x: hidden;
+        }
+    </style>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-pink-50 via-white to-rose-50 py-12 md:py-20">
+            <div class="absolute top-0 right-0 w-80 h-80 bg-pink-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-rose-200 rounded-full blur-3xl opacity-30 -z-10"></div>
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-3xl mx-auto">
+                    <div class="inline-flex items-center gap-2 bg-pink-100 text-pink-800 rounded-full px-4 py-1.5 text-sm font-semibold mb-4">
+                        <i class="fas fa-certificate text-pink-600"></i>
+                        <span>Online Gumasta / Shop License Registration</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 leading-tight">
+                        Gumasta <span class="gradient-text">License</span>
+                    </h1>
+                    <p class="text-gray-600 text-lg mt-4">Register your shop or establishment under the Shop & Establishment Act. Get your Gumasta License certificate online with expert assistance.</p>
+                    <div class="flex flex-wrap gap-4 justify-center mt-8">
+                        <a href="/apply/" class="px-8 py-3 bg-pink-600 hover:bg-pink-700 text-white rounded-xl font-semibold shadow-lg transition flex items-center gap-2">
+                            Apply for Gumasta License <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#documents" class="px-8 py-3 bg-white border border-gray-300 rounded-xl font-medium text-gray-700 hover:border-pink-400 hover:text-pink-600 transition">
+                            Documents required <i class="fas fa-file-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Gumasta License Section -->
+        <section id="overview" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">About <span class="gradient-text">Gumasta License</span></h2>
+                        <div class="w-20 h-1 bg-pink-500 rounded-full mt-3 mb-5"></div>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            The Gumasta License, also known as the Shop & Establishment License, is a mandatory registration required for any business operating from a commercial or home-based establishment. It is governed by the respective state's Shop and Establishment Act.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            This license regulates working conditions, hours of operation, wages, holidays, and other employment conditions for people working in shops, commercial establishments, hotels, restaurants, theaters, and other public amusement centers. It is one of the most important local licenses for any business in India.
+                        </p>
+                        <div class="mt-6 flex flex-wrap gap-4">
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">Mandatory for all businesses</span></div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">Valid for 1-5 years</span></div>
+                            <div class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i><span class="text-sm">State-specific regulations</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-8 shadow-lg">
+                        <div class="text-center">
+                            <i class="fas fa-building text-6xl text-pink-600 mb-4"></i>
+                            <div class="text-3xl font-bold text-pink-600 mb-2">License Validity</div>
+                            <p class="text-gray-600 mb-4">Issued by the local municipal corporation or labor department</p>
+                            <div class="bg-white rounded-xl p-4 shadow-md">
+                                <p class="font-semibold text-gray-800">Covered Establishments:</p>
+                                <p class="text-sm text-gray-500 mt-2">Shops | Hotels | Restaurants | Theaters | Offices | Warehouses | Commercial Establishments</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="py-12 sm:py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+
+    <!-- Heading -->
+    <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
+        Application <span class="text-pink-600">Process</span>
+      </h2>
+      <div class="w-20 sm:w-24 h-1 bg-pink-500 mx-auto rounded-full mt-3"></div>
+      <p class="text-gray-500 mt-4 text-sm sm:text-base">
+        Simple 4-step process for Gazette Notification
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Step 1 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-pink-600">1</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-pink-600 mb-2">25%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Fill Application Form</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Enter personal details for Gazette Notification
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-pink-600">2</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-pink-600 mb-2">50%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Upload Documents</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Submit ID proof, affidavit & newspaper publication
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-pink-600">3</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-pink-600 mb-2">75%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Make Payment</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Complete payment after verification
+        </p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="bg-white rounded-xl p-5 sm:p-6 text-center shadow-md hover:shadow-xl transition">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-xl sm:text-2xl font-bold text-green-600">4</span>
+        </div>
+        <div class="text-xl sm:text-2xl font-bold text-green-600 mb-2">100%</div>
+        <h3 class="font-semibold text-gray-800 text-sm sm:text-base">Get Gazette Notification</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2">
+          Receive your official Gazette publication copy
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+        <!-- Why Choose Us + Importance -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Why Choose Us -->
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800">Why <span class="gradient-text">Choose Us</span>?</h2>
+                        <div class="w-20 h-1 bg-pink-500 rounded-full mt-3 mb-5"></div>
+                        <p class="text-gray-600 mb-6">Our expertise lies in delivering what we commit. We make sure to get the things done and believe in the motto that customer is the Boss. We have an endlessly increasing and proud list of satisfied clients.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3"><i class="fas fa-headset text-pink-600 text-xl"></i><span>Dedicated Support</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-sync-alt text-pink-600 text-xl"></i><span>Regular Updates</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-bolt text-pink-600 text-xl"></i><span>Quick Service</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-phone-alt text-pink-600 text-xl"></i><span>Call Assistance</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-smile text-pink-600 text-xl"></i><span>Hassle Free</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-file-certificate text-pink-600 text-xl"></i><span>License Delivery</span></div>
+                        </div>
+                    </div>
+                    <!-- Importance of Gumasta License -->
+                    <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Why is <span class="gradient-text">Gumasta License</span> Important?</h3>
+                        <p class="text-gray-600 mb-4">This license is a legal requirement for any commercial establishment and offers multiple benefits.</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Legally operate business</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Open current bank account</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Avail government schemes</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Protection from legal action</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Employee rights compliance</span></div>
+                            <div class="flex items-start gap-2"><i class="fas fa-check-circle text-green-500 mt-1"></i><span class="text-sm">Business loan eligibility</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documents Required Section -->
+        <section id="documents" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Documents Required for <span class="gradient-text">Gumasta License</span></h2>
+                    <div class="w-24 h-1 bg-pink-500 mx-auto rounded-full mt-3"></div>
+                    <p class="text-gray-500 mt-4">Common documents needed for Shop & Establishment Registration</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Identity & Business Proof -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-pink-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-id-card text-pink-600 mr-2"></i>Identity & Business Proof</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ PAN Card of Owner/Business</li>
+                            <li>✓ Aadhaar Card of Proprietor/Partner</li>
+                            <li>✓ Passport Size Photographs (2 copies)</li>
+                            <li>✓ Business Name & Nature of Business</li>
+                        </ul>
+                    </div>
+
+                    <!-- Address Proof -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-pink-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-home text-pink-600 mr-2"></i>Address Proof of Establishment</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ Rent Agreement (if rented premises)</li>
+                            <li>✓ No Objection Certificate (NOC) from owner</li>
+                            <li>✓ Latest Electricity Bill / Water Bill</li>
+                            <li>✓ Property Tax Receipt (if owned)</li>
+                            <li>✓ Municipal Khata Certificate</li>
+                        </ul>
+                    </div>
+
+                    <!-- Additional Documents -->
+                    <div class="doc-card bg-white rounded-xl p-6 shadow-sm border-l-4 border-pink-500">
+                        <h3 class="font-bold text-lg mb-3"><i class="fas fa-file-alt text-pink-600 mr-2"></i>Additional Documents</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>✓ GST Registration Certificate (if applicable)</li>
+                            <li>✓ Partnership Deed (for partnership firms)</li>
+                            <li>✓ Certificate of Incorporation (for companies)</li>
+                            <li>✓ Employee Details (if any)</li>
+                            <li>✓ Previous License (for renewal)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Additional Info Box -->
+                <div class="mt-8 bg-pink-50 rounded-xl p-5 border border-pink-200">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-info-circle text-pink-600 text-xl mt-0.5"></i>
+                        <div>
+                            <p class="text-sm text-gray-700"><strong class="font-semibold">Note:</strong> Document requirements may vary slightly by state and local municipality. We will guide you based on your specific location and business type. The license is typically valid for 1 to 5 years and requires renewal before expiry.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Types of Establishments Covered -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Establishments that Require <span class="gradient-text">Gumasta License</span></h2>
+                    <div class="w-24 h-1 bg-pink-500 mx-auto rounded-full mt-3"></div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-store text-2xl text-pink-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Shops & Retail Stores</h3>
+                        <p class="text-gray-500 text-sm">Any retail shop, grocery store, clothing store, electronics shop, etc.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-utensils text-2xl text-pink-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Hotels & Restaurants</h3>
+                        <p class="text-gray-500 text-sm">Hotels, restaurants, cafes, canteens, food joints, and eateries</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-building text-2xl text-pink-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Offices & Commercial Spaces</h3>
+                        <p class="text-gray-500 text-sm">Corporate offices, coworking spaces, professional services, consultants</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-film text-2xl text-pink-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Entertainment Venues</h3>
+                        <p class="text-gray-500 text-sm">Theaters, cinemas, amusement parks, clubs, gyms, spas</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-warehouse text-2xl text-pink-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Warehouses & Godowns</h3>
+                        <p class="text-gray-500 text-sm">Storage facilities, warehouses, distribution centers</p>
+                    </div>
+                    <div class="text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition">
+                        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-hand-holding-heart text-2xl text-pink-600"></i></div>
+                        <h3 class="font-bold text-xl mb-2">Other Establishments</h3>
+                        <p class="text-gray-500 text-sm">Beauty salons, clinics, coaching centers, workshops, etc.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits of Gumasta License -->
+        <section id="benefits" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-5 md:px-10">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Benefits of <span class="gradient-text">Gumasta License</span></h2>
+                    <div class="w-24 h-1 bg-pink-500 mx-auto rounded-full mt-3"></div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-gavel text-pink-600 text-2xl"></i><div><h3 class="font-semibold">Legal Compliance</h3><p class="text-sm text-gray-500">Avoid penalties and legal notices from local authorities</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-university text-pink-600 text-2xl"></i><div><h3 class="font-semibold">Bank Account Opening</h3><p class="text-sm text-gray-500">Required for opening current bank account for business</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-hand-holding-usd text-pink-600 text-2xl"></i><div><h3 class="font-semibold">Business Loan Eligibility</h3><p class="text-sm text-gray-500">Essential document for MSME and business loans</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-shield-alt text-pink-600 text-2xl"></i><div><h3 class="font-semibold">Employee Protection</h3><p class="text-sm text-gray-500">Ensures proper working conditions and employee rights</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-file-invoice text-pink-600 text-2xl"></i><div><h3 class="font-semibold">Government Tenders</h3><p class="text-sm text-gray-500">Required for participating in government contracts</p></div></div>
+                    <div class="flex gap-3 p-4 rounded-xl bg-white hover:shadow-md transition"><i class="fas fa-check-double text-pink-600 text-2xl"></i><div><h3 class="font-semibold">Business Credibility</h3><p class="text-sm text-gray-500">Increases customer trust and business reputation</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Apply Now Section (CTA) -->
+        <section id="apply" class="py-16 bg-gradient-to-r from-pink-700 to-rose-800 text-white">
+            <div class="max-w-4xl mx-auto px-5 md:px-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Get Your Gumasta License?</h2>
+                <p class="text-pink-100 mb-8">Get expert assistance for Shop & Establishment Registration. We help with form filling, document verification, and license delivery.</p>
+                <a href="/apply/" class="inline-flex items-center gap-2 bg-white text-pink-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition shadow-lg">
+                    Apply for Gumasta License <i class="fas fa-arrow-right"></i>
+                </a>
+                <p class="text-pink-200 text-sm mt-6">*T&C Apply | Assisted service, not a government website</p>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="py-8 bg-gray-100">
+            <div class="max-w-4xl mx-auto px-5 text-center">
+                <p class="text-xs text-gray-500">Disclaimer: This is an assisted service platform, not a government website. We provide professional assistance for Gumasta/Shop & Establishment License. All trademarks belong to respective state authorities.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 pt-12 pb-6">
+        <div class="max-w-7xl mx-auto px-5 md:px-10 text-center">
+            <p class="text-sm">© 2026 Samarth Seva | Gumasta License (Shop & Establishment) Assistance</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        }
+
+        // Close menu on scroll
+        window.addEventListener("scroll", () => {
+            if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.add("hidden");
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === "#") return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    if (mobileMenu) mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+{% endblock %}

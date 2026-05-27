@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply Now | Document Service Provider</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-5 md:px-10 py-3 flex justify-between items-center">
+
+      <!-- Logo -->
+      <a href="./index.html" class="flex items-center">
+        <img src="{{ global_logo.logo.url }}" alt="logo" class="h-20 w-auto">
+      </a>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex items-center space-x-8 text-gray-700 font-medium">
+        <a href="./index.html" class="block py-2 text-gray-700 hover:text-indigo-600">Home</a>
+        <a href="./index.html#services" class="hover:text-indigo-600 transition duration-300">Services</a>
+        <a href="apply.html" class="hover:text-indigo-600 transition duration-300">
+          Apply Now
+        </a>
+        <a href="./index.html#why" class="hover:text-indigo-600 transition duration-300">Why Us</a>
+
+        <!-- CTA Button -->
+        <a href="./index.html#how-it-works"
+          class="bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition duration-300 shadow-md">
+          Get Started
+        </a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button id="menu-btn">
+          <i class="fas fa-bars text-gray-700 text-2xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+      <a href="./index.html" class="block py-2 text-gray-700 hover:text-indigo-600">Home</a>
+
+      <a href="./index.html#services" class="block py-2 text-gray-700 hover:text-indigo-600">Services</a>
+      <a href="./apply.html" class="block py-2 text-gray-700 hover:text-indigo-600">
+        Apply Now
+      </a>
+      <a href="./index.html#why" class="block py-2 text-gray-700 hover:text-indigo-600">Why Us</a>
+
+      <a href="./index.html#how-it-works"
+        class="block mt-3 text-center bg-indigo-600 text-white py-2 rounded-full hover:bg-indigo-700">
+        Get Started
+      </a>
+    </div>
+  </header>
+
+  <!-- YOUR SAME FORM (NO CHANGES) -->
+  <section id="apply" class="py-16 bg-gradient-to-b from-indigo-50/30 to-white">
+    <div class="container mx-auto px-5 md:px-8">
+      <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+
+        <div class="bg-indigo-700 px-6 py-5 text-white">
+          <h2 class="text-2xl font-bold flex items-center gap-2">
+            <i class="fas fa-pen-alt"></i> Apply for Your Document
+          </h2>
+          <p class="text-indigo-100 text-sm mt-1">
+            Fill the quick form. Our expert will assist within 24 hours*
+          </p>
+        </div>
+
+        <div class="p-6 md:p-8">
+          <form id="applicationForm" class="space-y-6" method="POST" action="/">
+            {% csrf_token %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">
+                  <i class="fas fa-tasks text-indigo-500 mr-1"></i> Select Service *
+                </label>
+                <select id="serviceType" required
+                  class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50 focus:bg-white transition"
+                  name="service_type">
+                  <option value="" disabled selected>– Choose service –</option>
+                  <option value="GST Registration">📄 GST Registration</option>
+                  <option value="Driving Licence">🚗 Driving Licence</option>
+                  <option value="Voter ID">🗳️ Voter ID</option>
+                  <option value="Udyam Aadhar">🏭 Udyam Aadhar</option>
+                  <option value="Gumasta">🏪 Gumasta</option>
+                  <option value="Street Vendor License">🛒 Street Vendor License</option>
+                  <option value="domicile">🏠 Domicile Certificate</option>
+                  <option value="gazette">📜 Gazette Certificate</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">
+                  <i class="fas fa-sync-alt text-indigo-500 mr-1"></i> Application Type *
+                </label>
+
+                <select required
+                  class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50 focus:bg-white transition"
+                  name="application_type">
+
+                  <option value="" disabled selected>– Select Type –</option>
+                  <option value="new">New Application</option>
+                  <option value="renew">Document Renewal</option>
+
+                </select>
+              </div>
+
+
+
+
+
+            </div>
+            <div>
+              <label class="block text-gray-700 font-semibold mb-2">
+                <i class="fas fa-user text-indigo-500 mr-1"></i> Full Name *
+              </label>
+              <input type="text" name="name" id="fullName" required
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">
+                  <i class="fas fa-mobile-alt text-indigo-500 mr-1"></i> Mobile *
+                </label>
+                <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required
+                  class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50">
+              </div>
+
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">
+                  <i class="fas fa-envelope text-indigo-500 mr-1"></i> Email *
+                </label>
+                <input type="email" id="email" name="email" required
+                  class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-gray-700 font-semibold mb-2">
+                <i class="fas fa-map-marker-alt text-indigo-500 mr-1"></i> Address *
+              </label>
+              <input type="text" name="address" id="address" required
+                class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+              <!-- Date of Birth -->
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">
+                  <i class="fas fa-calendar-alt text-indigo-500 mr-1"></i> Date of Birth *
+                </label>
+
+                <input name="dob" type="text" placeholder="Select Date of Birth" onfocus="(this.type='date')"
+                  class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50 focus:bg-white transition">
+              </div>
+
+              <!-- Notes -->
+              <div>
+                <label class="block text-gray-700 font-semibold mb-2">
+                  <i class="fas fa-sticky-note text-indigo-500 mr-1"></i> Notes
+                </label>
+
+                <input type="text" name="notes" placeholder="Enter Notes"
+                  class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50 focus:bg-white transition">
+              </div>
+
+            </div>
+
+            <div class="flex items-start gap-3">
+              <input type="checkbox" required>
+              <label class="text-sm text-gray-600">
+                I confirm details are correct.
+              </label>
+            </div>
+
+            <button id="submitBtn" class="w-full py-3 bg-indigo-600 text-white rounded-xl" type="submit">
+                            Submit Application
+                        </button>
+                        <!-- <button type="submit">submit</button> -->
+                      </form>
+
+          <!-- Success -->
+          <div id="successMessage" class="hidden mt-6 bg-green-50 p-4 rounded-lg text-green-700">
+            ✅ Application Submitted Successfully!
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 pt-12 pb-6 mt-10">
+
+    <div class="max-w-7xl mx-auto px-5 md:px-10">
+
+      <!-- Top Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center md:text-left">
+
+        <!-- Brand -->
+        <div>
+          <h2
+            class="text-2xl font-bold mb-3 bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
+            Document Service Provider
+          </h2>
+          <p class="text-sm text-gray-400">
+            We provide easy, fast & reliable assistance for government document services like GST, Driving Licence,
+            Voter ID & more.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3
+            class=" bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent text-2xl font-semibold mb-3">
+            Quick Links</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html" class="hover:text-indigo-400 transition">Home</a></li>
+            <li><a href="./index.html#services" class="hover:text-indigo-400 transition">Services</a></li>
+            <li><a href="./index.html#why" class="hover:text-indigo-400 transition">Why Us</a></li>
+            <li><a href="apply.html" class="hover:text-indigo-400 transition">Apply Now</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h3
+            class=" bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent text-2xl font-semibold mb-3">
+            Services</h3>
+          <ul class="space-y-2 text-sm">
+
+            <li class="cursor-pointer hover:text-indigo-400 transition" data-service="gumasta">
+              <a href="./index.html#gumasta">Gumasta License</a>
+            </li>
+
+            <li class="cursor-pointer hover:text-indigo-400 transition" data-service="udyam">
+              <a href="./index.html#udyam">Udyam Aadhaar</a>
+            </li>
+
+            <li class="cursor-pointer hover:text-indigo-400 transition" data-service="gst">
+              <a href="./index.html#gst">GST Registration</a>
+            </li>
+
+            <li class="cursor-pointer hover:text-indigo-400 transition" data-service="dl">
+              <a href="./index.html#dl">Driving Licence</a>
+            </li>
+
+            <li class="cursor-pointer hover:text-indigo-400 transition" data-service="voter">
+              <a href="./index.html#voter">Voter ID</a>
+            </li>
+            <li class="cursor-pointer hover:text-indigo-400 transition" data-service="street-vendor">
+              <a href="./index.html#street-vendor">Street Vendor License</a>
+            </li>
+            <li class="cursor-pointer hover:text-indigo-400 transition" data-service="domicile">
+              <a href="./index.html#domicile">Domicile</a>
+            </li>
+            <li class="cursor-pointer hover:text-indigo-400 transition" data-service="gazette">
+              <a href="./index.html#gazette">Gazette Notification</a>
+            </li>
+
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h3
+            class=" bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent text-2xl  font-semibold mb-3">
+            Contact</h3>
+          <p class="text-sm text-gray-400">📍 Punjab, India</p>
+          <p class="text-sm mt-1">
+            📞 <a href="tel:+919923023977" class="hover:text-indigo-400 transition">
+              +919923023977
+            </a>
+          </p>
+
+          <p class="text-sm mt-1">
+            ✉️ <a href="mailto:contact@documentserviceprovider.com" class="hover:text-indigo-400 transition">
+              contact@documentserviceprovider.com
+            </a>
+          </p>
+
+          <!-- Social Icons
+        <div class="flex justify-center md:justify-start gap-4 mt-4">
+
+          <div class="w-9 h-9 flex items-center justify-center bg-gray-800 rounded-full hover:bg-indigo-600 transition cursor-pointer">
+            <i class="fab fa-facebook"></i>
+          </div>
+
+          <div class="w-9 h-9 flex items-center justify-center bg-gray-800 rounded-full hover:bg-indigo-600 transition cursor-pointer">
+            <i class="fab fa-twitter"></i>
+          </div>
+
+          <div class="w-9 h-9 flex items-center justify-center bg-gray-800 rounded-full hover:bg-indigo-600 transition cursor-pointer">
+            <i class="fab fa-linkedin"></i>
+          </div>
+
+        </div> -->
+        </div>
+
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-gray-700 mt-10 pt-6 text-center">
+
+        <p class="text-sm text-gray-400">
+          © 2026
+          <span class="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent font-semibold">
+            Document Service Provider
+          </span>
+          | This is an assisted service platform, not a government website.
+        </p>
+
+        <p class="text-xs text-gray-500 mt-2">
+          Disclaimer: Information is for reference only. All trademarks belong to respective authorities.
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- Script -->
+
+  <script>
+    /* ================= NAVBAR ================= */
+
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const icon = menuBtn.querySelector("i");
+
+    // Toggle Menu
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+
+      // Change icon
+      icon.classList.toggle("fa-bars");
+      icon.classList.toggle("fa-times");
+    });
+
+    // Close menu on link click
+    document.querySelectorAll("#mobile-menu a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+
+        // Reset icon
+        icon.classList.add("fa-bars");
+        icon.classList.remove("fa-times");
+      });
+    });
+
+
+    // Close menu on scroll
+    window.addEventListener("scroll", () => {
+      if (!mobileMenu.classList.contains("hidden")) {
+
+        mobileMenu.classList.add("hidden");
+
+        icon.classList.add("fa-bars");
+        icon.classList.remove("fa-times");
+      }
+    });
+    const header = document.querySelector("header");
+
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > lastScrollY) {
+        // Scrolling Down
+        header.style.transform = "translateY(-100%)";
+      } else {
+        // Scrolling Up
+        header.style.transform = "translateY(0)";
+      }
+
+      lastScrollY = window.scrollY;
+    });
+    /* ================= FORM ================= */
+
+    // const form = document.getElementById("applicationForm");
+    // const success = document.getElementById("successMessage");
+
+    // if (form) {
+    //   form.addEventListener("submit", function(e) {
+    //     e.preventDefault();
+
+    //     form.reset();
+    //     success.classList.remove("hidden");
+
+    //     // Auto hide success after 3 sec (optional)
+    //     setTimeout(() => {
+    //       success.classList.add("hidden");
+    //     }, 3000);
+    //   });
+    // }
+  </script>
+
+
+</body>
+
+</html>
